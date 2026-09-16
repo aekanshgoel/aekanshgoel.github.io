@@ -1,0 +1,32 @@
+{% assign canonical_url = page.url | replace: 'index.html', '' | absolute_url %}
+{% assign page_description = page.description | default: site.description %}
+{% if page.title and page.title != 'Home' %}{% assign seo_title = page.title | append: ' · ' | append: site.name %}{% else %}{% assign seo_title = site.name %}{% endif %}
+<meta name="description" content="{{ page_description | escape }}">
+<meta name="author" content="{{ site.name }}">
+<link rel="canonical" href="{{ canonical_url }}">
+<meta property="og:site_name" content="{{ site.name | escape }}">
+<meta property="og:title" content="{{ seo_title | escape }}">
+<meta property="og:description" content="{{ page_description | escape }}">
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{ seo_title | escape }}">
+<meta name="twitter:description" content="{{ page_description | escape }}">
+{% if page.layout == 'post' %}
+<meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+<meta property="article:author" content="{{ site.name | escape }}">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": {{ canonical_url | jsonify }} },
+  "headline": {{ page.title | jsonify }},
+  "description": {{ page_description | jsonify }},
+  "datePublished": "{{ page.date | date_to_xmlschema }}",
+  "dateModified": "{{ page.date | date_to_xmlschema }}",
+  "author": { "@type": "Person", "name": {{ site.name | jsonify }}, "url": {{ '/about/' | absolute_url | jsonify }} },
+  "publisher": { "@type": "Person", "name": {{ site.name | jsonify }} },
+  "url": {{ canonical_url | jsonify }}
+}
+</script>
+{% endif %}
