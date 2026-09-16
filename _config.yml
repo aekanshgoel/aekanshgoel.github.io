@@ -1,1 +1,47 @@
-theme: jekyll-theme-midnight
+title: Aekansh Goel
+name: Aekansh Goel
+initials: AG
+tagline: "Atlanta. A factory floor. A tennis court. Trying to notice what’s actually going on."
+description: "Notes on manufacturing, learning, and attention from Atlanta."
+location: Atlanta, Georgia
+
+email: aekansh@gatech.edu
+github_url: https://github.com/aekanshgoel
+linkedin_url: https://www.linkedin.com/in/aekanshgoel/
+
+url: https://aekanshgoel.github.io
+baseurl: ""
+
+lang: en
+timezone: America/New_York
+permalink: /writing/:title/
+future: true
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter_opts:
+    disable: true
+
+plugins: []
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      published: true
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: default
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .gitignore
