@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en' }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if page.title and page.title != "Home" %}{{ page.title }} · {{ site.name }}{% else %}{{ site.name }}{% endif %}</title>
+    <meta name="description" content="{{ page.description | default: site.description | escape }}">
+    <meta name="author" content="{{ site.name }}">
+    <meta name="color-scheme" content="light dark">
+    <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="frame">
+      <aside class="spine" aria-hidden="true">
+        <p class="spine-type">{{ site.name }} <span class="spine-year">{{ 'now' | date: '%Y' }}</span></p>
+      </aside>
+      <div class="sheet">
+        {% include header.html %}
+        <main id="main" class="site-main">{{ content }}</main>
+        {% include footer.html %}
+      </div>
+    </div>
+  </body>
+</html>

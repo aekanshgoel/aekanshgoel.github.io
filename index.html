@@ -1,0 +1,18 @@
+---
+layout: default
+title: Home
+description: Manufacturing engineer in Atlanta writing about process, learning, and attention.
+---
+<p class="colophon"><b>{{ site.initials }}</b> Notes from {{ site.location }}</p>
+<p class="manifesto">{{ site.tagline }}</p>
+<section aria-labelledby="contents-title">
+  <p class="contents-head" id="contents-title">Contents <span>Selected writing</span></p>
+  {% if site.posts.first %}
+    {% for post in site.posts limit: 3 %}
+      {% include article-item.html post=post heading="h2" %}
+    {% endfor %}
+    <a class="all-writing" href="{{ '/writing/' | relative_url }}">View all writing</a>
+  {% else %}
+    <div class="empty-state"><p>No articles yet.</p></div>
+  {% endif %}
+</section>

@@ -1,0 +1,10 @@
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p class="copyright">© {{ 'now' | date: '%Y' }} {{ site.name }}</p>
+    <nav class="footer-nav" aria-label="Elsewhere">
+      {% if site.github_url %}<a href="{{ site.github_url }}" rel="me noopener noreferrer" target="_blank">GitHub</a>{% endif %}
+      {% if site.linkedin_url %}<a href="{{ site.linkedin_url }}" rel="me noopener noreferrer" target="_blank">LinkedIn</a>{% endif %}
+      {% if site.email %}<a href="mailto:{{ site.email }}">Email</a>{% endif %}
+    </nav>
+  </div>
+</footer>

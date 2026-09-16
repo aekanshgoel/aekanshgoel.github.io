@@ -1,0 +1,24 @@
+---
+layout: default
+title: Writing
+permalink: /writing/
+description: All articles.
+---
+<h1 class="page-title">Writing</h1>
+<p class="page-intro">Short pieces on manufacturing, learning, and paying attention.</p>
+{% if site.posts.first %}
+  {% capture tag_blob %}{% for post in site.posts %}{% for tag in post.tags %}{{ tag }}|{% endfor %}{% endfor %}{% endcapture %}
+  {% assign tag_list = tag_blob | split: "|" | uniq | sort %}
+  {% if tag_list.size > 0 %}
+  <div class="filters" data-writing-filter>
+    <button type="button" data-filter="all" aria-pressed="true">All</button>
+    {% for tag in tag_list %}{% if tag != "" %}<button type="button" data-filter="{{ tag }}">{{ tag }}</button>{% endif %}{% endfor %}
+  </div>
+  {% endif %}
+  <p class="contents-head">Contents <span>{{ site.posts | size }} notes</span></p>
+  {% for post in site.posts %}{% include article-item.html post=post heading="h2" %}{% endfor %}
+  <div class="empty-state" data-filter-empty hidden><p>No articles with that tag.</p></div>
+  <script src="{{ '/assets/js/writing.js' | relative_url }}"></script>
+{% else %}
+  <div class="empty-state"><p>No articles yet.</p></div>
+{% endif %}
