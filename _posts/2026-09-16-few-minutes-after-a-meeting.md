@@ -86,8 +86,8 @@ Those meetings can feel exhausting not simply because they take time, but becaus
 
 Research on workplace meetings suggests that quality matters. Meetings that feel relevant, well managed, and useful tend to have better outcomes. Counterproductive meeting behavior—such as poor structure, distractions, unclear goals, or disrespectful interaction—has been linked with lower engagement and more emotional exhaustion.
 
-So the real question is not always, “How many meetings do we have?”
+> So the real question is not always, “How many meetings do we have?”
+>
+> Sometimes it is, “What kind of meetings are we having?”
 
-Sometimes it is, “What kind of meetings are we having?”
-
-<p style="font-family: Georgia, Palatino, serif; font-size: 1.42rem; font-weight: 700; font-style: italic; line-height: 1.45; letter-spacing: -.02em;">But the post-meeting fog often gets worse when there is no space between one meeting and the next. That is where back-to-back meetings become more than a calendar problem.</p>
+`But the post-meeting fog often gets worse when there is no space between one meeting and the next. That is where back-to-back meetings become more than a calendar problem.`
