@@ -1,0 +1,118 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import ArticleCard from "../../components/ArticleCard.astro";
+
+const posts = (await getCollection("posts")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+// Aggregate tags for the lightweight filter, most-used first.
+const tagCounts = new Map<string, number>();
+for (const post of posts) {
+  for (const tag of post.data.tags) {
+    tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1);
+  }
+}
+const tags = [...tagCounts.entries()].sort(
+  (a, b) => b[1] - a[1] || a[0].localeCompare(b[0])
+);
+---
+
+<Base title="Writing">
+  <section class="container writing-page">
+    <header class="page-head">
+      <h1>Writing</h1>
+      <p class="page-sub">Notes on engineering, learning, and how I spend my time.</p>
+    </header>
+
+    {
+      posts.length === 0 ? (
+        <div class="empty-state">
+          <p class="empty-title">No articles yet.</p>
+          <p>
+            Add a Markdown file to <code>src/content/posts/</code> and it will appear here.
+          </p>
+        </div>
+      ) : (
+        <>
+          <div class="filter-bar" role="group" aria-label="Filter articles by tag">
+            <button type="button" class="chip is-active" data-tag="" aria-pressed="true">
+              All
+            </button>
+            {tags.map(([tag]) => (
+              <button type="button" class="chip" data-tag={tag} aria-pressed="false">
+                {tag}
+              </button>
+            ))}
+          </div>
+
+          <p class="list-count" role="status">
+            Showing all {posts.length} articles
+          </p>
+
+          <div class="post-list">
+            {posts.map((post) => <ArticleCard post={post} />)}
+          </div>
+
+          <div class="no-results" hidden>
+            <p>Nothing tagged “<span class="no-results-tag"></span>” yet.</p>
+            <button type="button" class="chip show-all">Show all articles</button>
+          </div>
+        </>
+      )
+    }
+  </section>
+
+  {
+    posts.length > 0 && (
+      <script>
+        // Tag filter — small, dependency-free, progressive enhancement.
+        // Without JavaScript the full list simply stays visible.
+        const chips = Array.from(document.querySelectorAll(".filter-bar .chip"));
+        const rows = Array.from(document.querySelectorAll(".post-row"));
+        const count = document.querySelector(".list-count");
+        const noResults = document.querySelector(".no-results");
+        const noResultsTag = document.querySelector(".no-results-tag");
+
+        function apply(tag) {
+          let visible = 0;
+          for (const row of rows) {
+            const rowTags = JSON.parse(row.dataset.tags || "[]");
+            const show = !tag || rowTags.includes(tag);
+            row.hidden = !show;
+            if (show) visible++;
+          }
+          for (const chip of chips) {
+            const active = chip.dataset.tag === tag;
+            chip.classList.toggle("is-active", active);
+            chip.setAttribute("aria-pressed", String(active));
+          }
+          if (count) {
+            count.textContent = tag
+              ? `Showing ${visible} of ${rows.length} articles · ${tag}`
+              : `Showing all ${rows.length} articles`;
+          }
+          if (noResults) {
+            noResults.hidden = visible > 0;
+            if (noResultsTag) noResultsTag.textContent = tag;
+          }
+          const url = new URL(window.location.href);
+          if (tag) url.searchParams.set("tag", tag);
+          else url.searchParams.delete("tag");
+          window.history.replaceState(null, "", url);
+        }
+
+        for (const chip of chips) {
+          chip.addEventListener("click", () => apply(chip.dataset.tag || ""));
+        }
+        document
+          .querySelector(".show-all")
+          ?.addEventListener("click", () => apply(""));
+
+        // Honor a ?tag= link if one was shared.
+        apply(new URLSearchParams(window.location.search).get("tag") ?? "");
+      </script>
+    )
+  }
+</Base>

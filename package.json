@@ -1,0 +1,21 @@
+{
+  "name": "aekanshgoel-website",
+  "version": "1.0.0",
+  "description": "Aekansh Goel — personal writing site (Astro, GitHub Pages)",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "author": "",
+  "homepage": "https://github.com/aekanshgoel/aekanshgoel.github.io#readme",
+  "private": "true",
+  "type": "module",
+  "dependencies": {
+    "astro": "^7.3.2"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}

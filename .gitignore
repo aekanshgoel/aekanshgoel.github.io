@@ -1,0 +1,10 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.astro/
+
+# Logs and OS noise
+npm-debug.log*
+.DS_Store

@@ -1,0 +1,37 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+import ArticleCard from "../components/ArticleCard.astro";
+import { site } from "../config";
+
+const posts = (await getCollection("posts")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+const latest = posts.slice(0, 3);
+---
+
+<Base>
+  <section class="container intro">
+    <h1>{site.name}</h1>
+    <p class="intro-bio">{site.bio}</p>
+    {site.location && <p class="intro-location">{site.location}</p>}
+  </section>
+
+  <section class="container latest" aria-labelledby="latest-heading">
+    <h2 id="latest-heading" class="overline">Latest writing</h2>
+
+    {
+      latest.length > 0 ? (
+        <div class="post-list">
+          {latest.map((post) => <ArticleCard post={post} heading="h3" />)}
+        </div>
+      ) : (
+        <p class="empty-note">
+          Nothing here yet — articles will appear here the moment you publish them.
+        </p>
+      )
+    }
+
+    <a class="view-all" href="/writing/">View all articles →</a>
+  </section>
+</Base>

@@ -1,0 +1,68 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../config";
+
+// ── REPLACE: this bio is placeholder text. Make it yours. ──
+const firstName = site.name.split(" ")[0];
+---
+
+<Base title="About">
+  <section class="container about">
+    <h1>About</h1>
+
+    <div class="prose">
+      <p>
+        I’m {firstName}, a manufacturing engineer and a practical problem
+        solver. My day job is making production processes more reliable, more
+        efficient, and easier to run — and my working method is continuous
+        improvement: measure, question, change, verify, repeat.
+      </p>
+      <p>
+        This is where I write down what I learn along the way: how to improve
+        systems that resist change, how to grow as an engineer on purpose, and
+        how to spend attention deliberately. The writing is meant to be
+        useful, honest, and short enough to finish over coffee.
+      </p>
+    </div>
+
+    <section class="focus" aria-labelledby="focus-heading">
+      <h2 id="focus-heading" class="overline">Areas of focus</h2>
+      <ul class="focus-list">
+        <li>
+          <span class="focus-name">Continuous improvement</span>
+          <span class="focus-desc">
+            Lean manufacturing, kaizen, measurement, and the discipline of
+            small, verified changes.
+          </span>
+        </li>
+        <li>
+          <span class="focus-name">Manufacturing systems</span>
+          <span class="focus-desc">
+            OEE, process stability, and the quiet trade-offs between speed,
+            cost, and quality.
+          </span>
+        </li>
+        <li>
+          <span class="focus-name">Deliberate learning</span>
+          <span class="focus-desc">
+            How practice, feedback, and time turn beginners into engineers
+            people want to work with.
+          </span>
+        </li>
+        <li>
+          <span class="focus-name">Thoughtful writing</span>
+          <span class="focus-desc">
+            Saying a little clearly, instead of a lot vaguely.
+          </span>
+        </li>
+      </ul>
+    </section>
+
+    <p class="contact-line">
+      Get in touch —
+      <a href={`mailto:${site.email}`}>{site.email}</a> ·
+      <a href={site.github} target="_blank" rel="noopener noreferrer">GitHub</a> ·
+      <a href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </p>
+  </section>
+</Base>

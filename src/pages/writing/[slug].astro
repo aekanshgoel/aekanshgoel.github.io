@@ -1,0 +1,76 @@
+---
+import {
+  getCollection,
+  render,
+  type CollectionEntry,
+} from "astro:content";
+import Base from "../../layouts/Base.astro";
+import { formatDate, postUrl, readingTime } from "../../lib/format";
+
+interface Props {
+  post: CollectionEntry<"posts">;
+  newer?: CollectionEntry<"posts">;
+  older?: CollectionEntry<"posts">;
+}
+
+export async function getStaticPaths() {
+  const posts = (await getCollection("posts")).sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+  );
+  return posts.map((post, i) => ({
+    params: { slug: post.id },
+    props: { post, newer: posts[i - 1], older: posts[i + 1] },
+  }));
+}
+
+const { post, newer, older } = Astro.props;
+const { Content } = await render(post);
+const minutes = readingTime(post.body ?? "", post.data.readingTime);
+---
+
+<Base title={post.data.title} description={post.data.description}>
+  <article class="container article">
+    <a class="back-link" href="/writing/">← All writing</a>
+
+    <header class="article-head">
+      <h1>{post.data.title}</h1>
+      <p class="article-meta">
+        <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+        <span class="meta-dot" aria-hidden="true">·</span>
+        <span>{minutes} min read</span>
+      </p>
+      {
+        post.data.tags.length > 0 && (
+          <p class="article-tags">{post.data.tags.join(" · ")}</p>
+        )
+      }
+    </header>
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    <nav class="post-nav" aria-label="Adjacent articles">
+      {
+        newer ? (
+          <a class="post-nav-link" href={postUrl(newer.id)}>
+            <span class="post-nav-label">Newer</span>
+            <span class="post-nav-title">{newer.data.title}</span>
+          </a>
+        ) : (
+          <span class="post-nav-spacer" aria-hidden="true"></span>
+        )
+      }
+      {
+        older ? (
+          <a class="post-nav-link is-right" href={postUrl(older.id)}>
+            <span class="post-nav-label">Older</span>
+            <span class="post-nav-title">{older.data.title}</span>
+          </a>
+        ) : (
+          <span class="post-nav-spacer" aria-hidden="true"></span>
+        )
+      }
+    </nav>
+  </article>
+</Base>
