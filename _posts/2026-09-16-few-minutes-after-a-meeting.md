@@ -30,7 +30,7 @@ The idea is simple:
 
 A meeting can end on your calendar before it has fully ended in your mind.
 
-## Meetings take more than time
+<h2 style="font-weight: 700; font-style: italic;">Meetings take more than time</h2>
 
 We often think of meetings as taking exactly as long as the invitation says.
 
@@ -50,7 +50,7 @@ Maybe the meeting was productive—but now you need a moment to figure out what 
 
 That mental “after-effect” is what people often feel as post-meeting fog.
 
-## Switching gears is real work
+<h2 style="font-weight: 700; font-style: italic;">Switching gears is real work</h2>
 
 One reason meetings can feel draining is that they require us to switch contexts.
 
@@ -68,7 +68,7 @@ It means your mind may need a moment to change gears.
 
 Think of it like driving. You can turn quickly, but a sharp turn still requires attention.
 
-## Not every meeting feels the same
+<h2 style="font-weight: 700; font-style: italic;">Not every meeting feels the same</h2>
 
 We have all had meetings that gave us energy.
 
@@ -90,4 +90,4 @@ So the real question is not always, “How many meetings do we have?”
 
 Sometimes it is, “What kind of meetings are we having?”
 
-But the post-meeting fog often gets worse when there is no space between one meeting and the next. That is where back-to-back meetings become more than a calendar problem.
+<p style="font-family: Georgia, Palatino, serif; font-size: 1.42rem; font-weight: 700; font-style: italic; line-height: 1.45; letter-spacing: -.02em;">But the post-meeting fog often gets worse when there is no space between one meeting and the next. That is where back-to-back meetings become more than a calendar problem.</p>
