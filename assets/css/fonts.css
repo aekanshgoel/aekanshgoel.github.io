@@ -1,0 +1,14 @@
+body,
+.filters button {
+  font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+}
+
+.page-title,
+.article-header h1,
+.not-found h1,
+.manifesto,
+.entry-title,
+.prose h2,
+.prose h3 {
+  font-family: "Instrument Serif", Georgia, Palatino, serif;
+}
